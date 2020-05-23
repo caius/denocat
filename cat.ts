@@ -1,4 +1,4 @@
-var exitCode = 0;
+let exitCode = 0;
 
 async function handleStdin() {
   await Deno.copy(Deno.stdin, Deno.stdout);
