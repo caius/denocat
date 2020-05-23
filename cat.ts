@@ -24,7 +24,8 @@ for (const i in Deno.args) {
       await Deno.copy(file, Deno.stdout);
       file.close();
     } catch (e) {
-      console.log(`cat: ${candidate}: No such file or directory\n`);
+      const error_message = `cat: ${candidate}: No such file or directory\n`;
+      Deno.stdout.writeSync(new TextEncoder().encode(error_message));
       exitCode = 1;
     }
   }
