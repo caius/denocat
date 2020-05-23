@@ -19,9 +19,14 @@ for (const i in Deno.args) {
     await handleStdin();
   } else {
     // Attempt to copy path on filesystem
-    const file = await Deno.open(candidate);
-    await Deno.copy(file, Deno.stdout);
-    file.close();
+    try {
+      const file = await Deno.open(candidate);
+      await Deno.copy(file, Deno.stdout);
+      file.close();
+    } catch (e) {
+      console.log(`cat: ${candidate}: No such file or directory\n`);
+      exitCode = 1;
+    }
   }
 }
 
